@@ -2,7 +2,7 @@ package pmsPackage;
 
 import java.util.Date;
 
-public class Event {
+class Event {
 	private Date startTime;
 	private Date endTime;
 	private String description;

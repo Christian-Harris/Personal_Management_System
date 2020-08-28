@@ -1,6 +1,6 @@
 package pmsPackage;
 
-public class Item {
+class Item {
 	private String item = "";
 	
 	public Item() {}

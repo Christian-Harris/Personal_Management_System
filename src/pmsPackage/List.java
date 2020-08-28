@@ -2,7 +2,7 @@ package pmsPackage;
 
 import java.util.*;
 
-public class List {
+class List {
 	private ArrayList<Item> list;
 	
 	public List() {
