@@ -1,17 +1,13 @@
 package pmsPackage;
 
-public class User {
+import java.util.*;
+
+ class User {
 	
 	private String username = "";
 	private String password = "";
 	private Planner userPlanner = new Planner();
-	
-	public User() {}
-	
-	public User(String u) {
-		this.username = u;
-	}
-	
+		
 	public User(String u, String p) {
 		this.username = u;
 		this.password = p;
@@ -31,6 +27,21 @@ public class User {
 	
 	public void setPassword(String p) {
 		this.password = p;
+	}
+	
+	public Planner getPlanner() {
+		return this.userPlanner;
+	}
+	
+	public void loadPlanner(Scanner in) {
+		while(true) {
+			this.getPlanner().displayPlanner();
+			System.out.println("0) Logout.");
+			String input = in.nextLine();
+			if(input.equals("0")) {
+				return;
+			}
+		}
 	}
 
 }
