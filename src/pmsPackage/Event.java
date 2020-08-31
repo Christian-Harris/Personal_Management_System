@@ -1,27 +1,35 @@
 package pmsPackage;
 
-import java.util.Date;
+import java.time.*;
 
 class Event {
-	private Date startTime;
-	private Date endTime;
+	private LocalDateTime startTime;
+	private LocalDateTime endTime;
 	private String description;
-	private boolean alert;
 	private String location;
+	private boolean repeats;
 	
-	public Event(Date st, Date et, String d, boolean a, String l) {
+	public Event(LocalDateTime st, LocalDateTime et, String d, String l, boolean rep) {
 		startTime = st;
 		endTime = et;
 		description = d;
-		alert = a;
 		location = l;
+		repeats = rep;
 	}
 	
-	public Date getStartTime() {
+	public void setRepeats(boolean rep) {
+		this.repeats = rep;
+	}
+	
+	public boolean doesRepeat() {
+		return this.repeats;
+	}
+	
+	public LocalDateTime getStartTime() {
 		return this.startTime;
 	}
 	
-	public Date getEndTime() {
+	public LocalDateTime getEndTime() {
 		return this.endTime;
 	}
 	
@@ -29,19 +37,15 @@ class Event {
 		return this.description;
 	}
 	
-	public boolean alertOn() {
-		return this.alert;
-	}
-	
 	public String getLocation() {
 		return this.location;
 	}
 	
-	public void setStartTime(Date d) {
+	public void setStartTime(LocalDateTime d) {
 		this.startTime = d;
 	}
 	
-	public void setEndTime(Date d) {
+	public void setEndTime(LocalDateTime d) {
 		this.endTime = d;
 	}
 	
@@ -49,11 +53,11 @@ class Event {
 		this.description = d;
 	}
 	
-	public void setAlertOn(boolean b) {
-		this.alert = b;
-	}
-	
 	public void setLocation(String l) {
 		this.location = l;
+	}
+	
+	public void printEvent() {
+		System.out.println("Description: " + description + "\nLocation: " + location + "\nStart Time: " + this.startTime.getHour() + ":" + this.startTime.getMinute() + "\nEnd Time: " + this.endTime.getHour() + ":" + this.endTime.getMinute() + "\nRepeats: " + this.repeats);
 	}
 }

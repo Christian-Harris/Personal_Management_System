@@ -34,12 +34,28 @@ import java.util.*;
 	}
 	
 	public void loadPlanner(Scanner in) {
+		String selection = "";
 		while(true) {
 			this.getPlanner().displayPlanner();
-			System.out.println("0) Logout.");
-			String input = in.nextLine();
-			if(input.equals("0")) {
+			System.out.print("\n0) Logout\n1) Add Event\n2) View Daily Events\n3) View All Events\n4) Go to lists\n>");
+			selection = in.nextLine();
+			if(selection.equals("0")) {
 				return;
+			}
+			else if(selection.equals("1")) {
+				this.getPlanner().constructEvent(in);
+			}
+			else if(selection.equals("2")) {
+				this.getPlanner().viewDailyEvents(in);
+			}
+			else if(selection.equals("3")) {
+				this.getPlanner().viewAllEvents(in);
+			}
+			else if(selection.equals("4")) {
+				this.getPlanner().displayLists(in);
+			}
+			else {
+				System.out.println(selection + " is not a valid selection.");
 			}
 		}
 	}

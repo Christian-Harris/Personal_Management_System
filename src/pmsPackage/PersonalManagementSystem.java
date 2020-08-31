@@ -40,9 +40,9 @@ public class PersonalManagementSystem {
 	private boolean login() {
 		String username = "";
 		while(true) {
-			System.out.print("Username (0 to exit): ");
+			System.out.print("Username (" + EXIT + " to exit): ");
 			username = this.getScanner().nextLine();
-			if(username.equals("0")) {
+			if(username.equals(Integer.toString(EXIT))) {
 				return false;
 			}
 			if(!this.userExists(username)) {
@@ -54,9 +54,9 @@ public class PersonalManagementSystem {
 		}
 		
 		while(true) {
-			System.out.print("Password (0 to exit): ");
+			System.out.print("Password (" + EXIT + " to exit): ");
 			String input = this.getScanner().nextLine();
-			if(input.equals("0")) {
+			if(input.equals(Integer.toString(EXIT))) {
 				return false;
 			}
 			if(!checkPassword(username, input)) {
@@ -87,8 +87,7 @@ public class PersonalManagementSystem {
 		int selection = -1;
 		while(true) {	
 			System.out.println("Main Menu");
-			System.out.println(PersonalManagementSystem.LOGIN + ") Login\n" + PersonalManagementSystem.NEW_USER +") New User\n" + PersonalManagementSystem.EXIT +") Exit");
-			System.out.print(">");
+			System.out.print(PersonalManagementSystem.LOGIN + ") Login\n" + PersonalManagementSystem.NEW_USER +") New User\n" + PersonalManagementSystem.EXIT +") Exit\n>");
 			String input = this.getScanner().nextLine();
 			try {
 				selection = Integer.parseInt(input);
@@ -162,6 +161,12 @@ public class PersonalManagementSystem {
 	
 	private void logout() {
 		this.currentUser = null;
+	}
+	
+	public static void clearScreen() {
+		for(int i = 0; i < 50; i++) {
+			System.out.print("\n");
+		}
 	}
 	
 }
