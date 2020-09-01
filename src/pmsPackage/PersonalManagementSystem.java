@@ -2,6 +2,14 @@ package pmsPackage;
 
 import java.util.*;
 
+/**
+ * <h2>PersonalManagementSystem<h2>
+ * <p>This class implements the driver for the Personal Management System application.
+ * <p>Created on 31 August 2020
+ * @author Christian Harris
+ *
+ */
+
 public class PersonalManagementSystem {
 	
 	private ArrayList<User> users = new ArrayList<User>();
@@ -21,6 +29,13 @@ public class PersonalManagementSystem {
 		users.add(new User("admin", "password"));
 	}
 	
+	/**
+	 * This method sets the currentUser based on the username String of a user object.
+	 * <pre>Examples:
+	 * {@code setCurrentUser("admin") sets the current user to the user named "admin".}
+	 * </pre>
+	 * @param usr (String; The username of the current user)
+	 */
 	private void setCurrentUser(String usr) {
 		for(int i = 0; i < this.getUsers().size(); i++) {
 			if(this.getUsers().get(i).getUsername().equals(usr)) {
@@ -29,14 +44,34 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method returns the current user of the application as a User object.
+	 * <pre>Examples:
+	 * {@code getCurrentUser() returns the User object of the current user.}
+	 * </pre>
+	 * @return currentUser (User; the current User object of the application.)
+	 */
 	private User getCurrentUser() {
 		return this.currentUser;
 	}
 	
+	/**
+	 * This method returns the users ArrayList containing all of the available users for the application.
+	 * <pre>Examples:
+	 * {@code getUsers() returns the ArrayList users.}
+	 * </pre>
+	 * @return users (ArrayList<User>; all of the available users.)
+	 */
 	private ArrayList<User> getUsers(){
 		return this.users;
 	}
 
+	/**
+	 * This method prompts a user for login information and validates if the user is available.
+	 * <pre>Examples:
+	 * {@code login() returns true if the user enters a valid username and password.}
+	 * </pre>
+	 */
 	private boolean login() {
 		String username = "";
 		while(true) {
@@ -70,6 +105,12 @@ public class PersonalManagementSystem {
 		return true;
 	}
 
+	/**
+	 * This method returns a boolean value based on if the username and password are a matching pair.
+	 * <pre>Examples:
+	 * {@code checkPassword("admin", "password") returns true if "admin" is a user and "password" is the users password.}
+	 * </pre>
+	 */
 	private boolean checkPassword(String usr, String pswd) {
 		for(int i = 0; i < this.getUsers().size(); i++) {
 			if(this.getUsers().get(i).getUsername().equals(usr) && this.getUsers().get(i).getPassword().equals(pswd)) {
@@ -79,10 +120,20 @@ public class PersonalManagementSystem {
 		return false;
 	}
 	
+	/**
+	 * This method returns a scanner object used for console input.
+	 * <pre>Examples:
+	 * {@code getScanner() returns a scanner object for System.in.}
+	 * </pre>
+	 * @return in (Scanner, a scanner for System.in)
+	 */
 	private Scanner getScanner() {
 		return this.in;
 	}
 	
+	/**
+	 * This method functions as the primary menu screen for the application.
+	 */
 	private void mainMenu() {
 		int selection = -1;
 		while(true) {	
@@ -114,6 +165,10 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method prompts a user for a new username and password. Both entries must begin with a letter.
+	 * The method prints error messages if either field begins with a non-letter or if the desired username is already in the application.
+	 */
 	private void createNewUser() {
 		String username;
 		String password;
@@ -150,6 +205,12 @@ public class PersonalManagementSystem {
 		this.getUsers().add(new User(username, password));
 	}
 	
+	/**
+	 * This method returns true if the application already has a user with the supplied username.
+	 * <pre>Examples:
+	 * {@code userExists("admin") returns true if the application has a user with username "admin".}
+	 * </pre>
+	 */
 	private boolean userExists(String usr) {
 		for(int i = 0; i < users.size(); i++) {
 			if(this.getUsers().get(i).getUsername().equals(usr)) {
@@ -159,14 +220,10 @@ public class PersonalManagementSystem {
 		return false;
 	}
 	
+	/**
+	 * This method sets the currentUser field to null.
+	 */
 	private void logout() {
 		this.currentUser = null;
 	}
-	
-	public static void clearScreen() {
-		for(int i = 0; i < 50; i++) {
-			System.out.print("\n");
-		}
-	}
-	
 }

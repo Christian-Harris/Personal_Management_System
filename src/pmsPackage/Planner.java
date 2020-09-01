@@ -3,6 +3,13 @@ package pmsPackage;
 import java.util.*;
 import java.time.*;
 
+/**
+ * <h2>Planner<h2>
+ * <p>This class implements a Planner object describing an event planner.
+ * <p>Created on 31 August 2020
+ * @author Christian Harris
+ */
+
 class Planner {
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
@@ -11,14 +18,32 @@ class Planner {
 	
 	public Planner() {}
 	
+	/**
+	 * This method adds the Event e to the events ArrayList for this Planner.
+	 * <pre>Examples:
+	 * {@code addEvent(Event e) adds the Event e to the events ArrayList for this Planner.}
+	 * </pre>
+	 */
 	public void addEvent(Event e) {
 		this.events.add(e);
 	}
 	
+	/**
+	 * This method adds the List l to the lists ArrayList for this Planner.
+	 * <pre>Examples:
+	 * {@code addList(List l) adds the List l to the lists ArrayList for this Planner.}
+	 * </pre>
+	 */
 	public void addList(List l) {
 		this.lists.add(l);
 	}
 	
+	/**
+	 * This method removes the List with name matching s from the lists ArrayList. If no such list exists the lists ArrayList is unchanged.
+	 * <pre>Examples:
+	 * {@code removeList("Shopping") removes the List with name matching s from the lists ArrayList. If no such list exists the lists ArrayList is unchanged.}
+	 * </pre>
+	 */
 	public void removeList(String s) {
 		for(int i = 0; i < this.lists.size(); i++) {
 			if(this.lists.get(i).getName().equals(s)) {
@@ -27,14 +52,31 @@ class Planner {
 		}
 	}
 	
+	/**
+	 * This method returns a reference to the ArrayList lists for this Planner object.
+	 * <pre>Examples:
+	 * {@code getLists() returns a reference to the ArrayList lists for this Planner object.}
+	 * </pre>
+	 * @return lists (ArrayList<List>; a reference to the ArrayList lists for this Planner object.)
+	 */
 	public ArrayList<List> getLists(){
 		return this.lists;
 	}
 	
+	/**
+	 * This method returns a reference to the LocalDate object representing the currentDate for this Planner.
+	 * <pre>Examples:
+	 * {@code getCurrentDate() returns a reference to the LocalDate object representing the currentDate for this Planner.}
+	 * </pre>
+	 * @return currentDate (LocalDate; a reference to the LocalDate object representing the currentDate for this Planner.)
+	 */
 	public LocalDate getCurrentDate() {
 		return this.currentDate;
 	}
 	
+	/**
+	 * This method displays a calendar of the current month. Days with Events are marked with an *.
+	 */
 	public void displayPlanner() {
 		System.out.println(this.getCurrentDate().getMonth());
 		LocalDate firstOfMonth = LocalDate.of(this.getCurrentDate().getYear(), this.getCurrentDate().getMonth(), 1);
@@ -59,6 +101,12 @@ class Planner {
 		System.out.println(days);
 	}
 	
+	/**
+	 * This method returns true if the LocalDate ld lies on an Event in events.
+	 * <pre>Examples:
+	 * {@code hasEvent(LocalDate day) returns true if an Event in events lies on day.}
+	 * </pre>
+	 */
 	private boolean hasEvent(LocalDate ld) {
 		for(int i = 0; i < this.events.size(); i++) {
 			if(ld.compareTo(this.events.get(i).getStartTime().toLocalDate()) == 0) {
@@ -71,6 +119,12 @@ class Planner {
 		return false;
 	}
 	
+	/**
+	 * This method functions to construct a new Event determined by the user. If the given day does not exist an error message is displayed.
+	 * <pre>Examples:
+	 * {@code constructEvent(Scanner in) prompts a user for fields required to generate a new Event object for events.}
+	 * </pre>
+	 */
 	public void constructEvent(Scanner in) {
 		String yearString = "";
 		String monthString = "";
@@ -295,6 +349,12 @@ class Planner {
 		}
 	}
 	
+	/**
+	 * This method prompts a user for a day in the current month and displays all the events which lie on the selected day.
+	 * <pre>Examples:
+	 * {@code viewDailyEvents(Scanner in) prompts a user for a day in the current month and displays all the events which lie on the selected day.}
+	 * </pre>
+	 */
 	public void viewDailyEvents(Scanner in) {
 		String selection = "";
 		int lengthOfMonth = this.getCurrentDate().getMonth().length(this.getCurrentDate().isLeapYear());
@@ -318,11 +378,23 @@ class Planner {
 		}
 	}
 	
+	/**
+	 * This method prints the details for an Event under construction.
+	 * <pre>Examples:
+	 * {@code displayEventDetails(String year, String month, String day, String startHour, String startMinute, String endHour, String endMinute, String description, String location, boolean repeats) prints the details passed to the method.}
+	 * </pre>
+	 */
 	private void displayEventDetails(String year, String month, String day, String startHour, String startMinute, String endHour, String endMinute, String description, String location, boolean repeats) {
 		String details = "1) Year: " + year + "\n2) Month: " + month + "\n3) Day: " + day + "\n4) Start Time: "+ startHour + ":" + startMinute + "\n5) End Time: " + endHour + ":" + endMinute + "\n6) Description: " + description + "\n7) Location: " + location + "\n8) Toggle Repeats:" + repeats;
 		System.out.println(details);
 	}
 	
+	/**
+	 * This method prints all the current Lists to the console and prompts the user to modify them.
+	 * <pre>Examples:
+	 * {@code displayLists(Scanner in) prints all the current Lists to the console and prompts the user to modify them.}
+	 * </pre>
+	 */
 	public void displayLists(Scanner in) {
 		String selection = "";
 		while(true) {
@@ -368,6 +440,12 @@ class Planner {
 		}
 	}
 	
+	/**
+	 * This method returns true if a List in the ArrayList lists has a name that matches s.
+	 * <pre>Examples:
+	 * {@code listExists("Shopping") returns true if a List in the ArrayList lists has a name that matches "Shopping".}
+	 * </pre>
+	 */
 	public boolean listExists(String s) {
 		for(int i = 0; i < this.lists.size(); i++) {
 			if(this.lists.get(i).getName().equals(s)){
@@ -377,6 +455,13 @@ class Planner {
 		return false;
 	}
 	
+	/**
+	 * This method returns a reference to the List object that has a name matching s.
+	 * <pre>Examples:
+	 * {@code getList("Shopping") returns a reference to the List object that has a name matching s.}
+	 * </pre>
+	 * @return list (List; a reference a List object.)
+	 */
 	public List getList(String s) {
 		int index = 0;
 		for(int i = 0; i < this.lists.size(); i++) {
@@ -387,6 +472,12 @@ class Planner {
 		return this.lists.get(index);
 	}
 	
+	/**
+	 * This method prints all the stored Events in the ArrayList events of this Planner to the console.
+	 * <pre>Examples:
+	 * {@code viewAllEvents(Scanner in) prints all the stored Events in the ArrayList events of this Planner to the console.}
+	 * </pre>
+	 */
 	public void viewAllEvents(Scanner in) {
 		String selection = "";
 		while(true) {

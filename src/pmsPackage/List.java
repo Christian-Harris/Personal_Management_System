@@ -2,6 +2,13 @@ package pmsPackage;
 
 import java.util.*;
 
+/**
+ * <h2>List<h2>
+ * <p>This class implements a List object with contains an ArrayList<Item> of Item objects.
+ * <p>Created on 31 August 2020
+ * @author Christian Harris
+ */
+
 class List {
 	private String name;
 	private ArrayList<Item> list;
@@ -16,10 +23,22 @@ class List {
 		this.list = itm;
 	}
 	
+	/**
+	 * This method adds the specified Item to the current list.
+	 * <pre>Examples:
+	 * {@code addItem(Item food) adds the item food to the current list.}
+	 * </pre>
+	 */
 	public void addItem(Item itm) {
 		this.list.add(itm);
 	}
 	
+	/**
+	 * This method deletes an Item object whose description field matches the String itm. If no such item exists the list is unchanged.
+	 * <pre>Examples:
+	 * {@code deleteItem("food") removes an item with description "food".}
+	 * </pre>
+	 */
 	public void deleteItem(String itm) {
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getItem().compareTo(itm) == 0) {
@@ -27,23 +46,42 @@ class List {
 			}
 		}
 	}
-	
-	public void deleteItem(int i) {
-		this.getList().remove(i);
-	}
-	
+
+	/**
+	 * This method returns the reference to the ArrayList<Item> object.
+	 * <pre>Examples:
+	 * {@code getList() returns the reference to the ArrayList<Item> object.}
+	 * </pre>
+	 * @return list (ArrayList<Item>; a reference to the ArrayList<Item> object.)
+	 */
 	public ArrayList<Item> getList(){
 		return this.list;
 	}
 	
+	/**
+	 * This method sets the name of this List object.
+	 * <pre>Examples:
+	 * {@code setName("Shopping") sets the name field of this List object to "Shopping".}
+	 * </pre>
+	 */
 	public void setName(String s) {
 		this.name = s;
 	}
 	
+	/**
+	 * This method returns the name field of this List object.
+	 * <pre>Examples:
+	 * {@code getName() returns the name field of this List object.}
+	 * </pre>
+	 * @return name (String; the name field of this List object.)
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * This method prints the contents of this List object to the console.
+	 */
 	public void display(Scanner in) {
 		String selection = "";
 		while(true) {
@@ -81,6 +119,12 @@ class List {
 		}
 	}
 	
+	/**
+	 * This method returns true if there exists and Item object in this List with a description of s.
+	 * <pre>Examples:
+	 * {@code itemExists("apple") returns true if this list contains an Item with a description of "apple".}
+	 * </pre>
+	 */
 	public boolean itemExists(String s) {
 		for(int i = 0; i < this.list.size(); i++) {
 			if(this.list.get(i).getItem().equals(s)) {
