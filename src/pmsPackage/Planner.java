@@ -76,7 +76,7 @@ class Planner {
 	
 	public void displayEvents() {
 		for(int i = 0; i < this.events.size(); i++) {
-			System.out.println(this.events.get(i).toString() + "\n");
+			System.out.println(this.events.get(i).getName() + "\n");
 		}
 	}
 	
@@ -143,6 +143,14 @@ class Planner {
 		for(int i = 0; i < this.lists.size(); i++) {
 			if(this.lists.get(i).getName().equals(name)) {
 				this.lists.get(i).display();
+			}
+		}
+	}
+	
+	public void connectEventList(String eventName, String listName) {
+		for(int i = 0; i < this.events.size(); i++) {
+			if(this.events.get(i).getName().equals(eventName)) {
+				this.events.get(i).setListName(listName);
 			}
 		}
 	}

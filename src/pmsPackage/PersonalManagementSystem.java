@@ -37,8 +37,8 @@ public class PersonalManagementSystem {
 		itms.add(tacos);
 		admin.getPlanner().addList("Shopping", itms);
 		admin.getPlanner().addList("To Do");
-		Event eventOne = new Event("Shopping", LocalDate.now(), LocalTime.now(), LocalTime.MIDNIGHT, "Grocery Shopping", "Grocery store");
-		Event eventTwo = new Event("Future", LocalDate.of(2021,  1, 12), LocalTime.of(12, 0), LocalTime.of(18, 30), "Future Event", "Somewhere");
+		Event eventOne = new Event("Shopping", LocalDate.now(), LocalTime.now(), LocalTime.MIDNIGHT, "Grocery Shopping", "Grocery store", "Shopping");
+		Event eventTwo = new Event("Future", LocalDate.of(2021,  1, 12), LocalTime.of(12, 0), LocalTime.of(18, 30), "Future Event", "Somewhere", "");
 		admin.getPlanner().addEvent(eventOne);
 		admin.getPlanner().addEvent(eventTwo);
 		
@@ -295,14 +295,16 @@ public class PersonalManagementSystem {
 		LocalTime endTime = LocalTime.now();
 		String description = "";
 		String location = "";
+		String listName = "";
 		
+		boolean newLink = false;
 		
 		String dateString = "";
 		String startString = "";
 		String endString = "";
 		while(true) {
 			System.out.println("Add Event");
-			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
+			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) List: " + listName + "\n8) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
@@ -314,7 +316,7 @@ public class PersonalManagementSystem {
 				if(this.currentUser.getPlanner().eventExists(selection)) {
 					System.out.println(selection + " already exists as an event.");
 				}
-				else if(selection.matches("[a-zA-Z].*")) {
+				else if(!selection.matches("[a-zA-Z].*")) {
 					System.out.println("Event name must start with a letter.");
 				}
 				else {
@@ -363,11 +365,47 @@ public class PersonalManagementSystem {
 				location = in.nextLine();
 			}
 			else if(selection.equals("7")) {
+				System.out.println("Would you like to link and existing list? (Y/N)");
+				selection = in.nextLine();
+				if(selection.equalsIgnoreCase("Y")) {
+					this.currentUser.getPlanner().displayLists();
+					System.out.print("Enter the name of the list to link:\n>");
+					selection = in.nextLine();
+					if(!this.currentUser.getPlanner().listExists(selection)) {
+						System.out.println(selection + " does not exist.");
+					}
+					else {
+						listName = selection;
+					}
+				}
+				else if(selection.equalsIgnoreCase("N")) {
+					System.out.println("Please enter the name of the new list.");
+					selection = in.nextLine();
+					if(this.currentUser.getPlanner().listExists(selection)) {
+						System.out.println("List already exists.");
+					}
+					else if(!selection.matches("[a-zA-Z].*")) {
+						System.out.println("List name must start with a letter.");
+					}
+					else {
+						listName = selection;
+						newLink = true;
+					}
+				}
+				else {
+					System.out.println("Invalid input.");
+				}
+			}
+			else if(selection.equals("8")) {
 				if(name.equals("") || dateString.equals("") || startString.equals("") || endString.equals("")) {
 					System.out.println("Missing required field.");
 				}
 				else {
-					this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location));
+					if(newLink);
+					{
+						this.currentUser.getPlanner().addList(listName);
+					}
+					this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName));
 					return;
 				}
 			}
@@ -404,7 +442,7 @@ public class PersonalManagementSystem {
 		while(true) {
 			System.out.println("View All Events");
 			this.currentUser.getPlanner().displayEvents();
-			System.out.println("0) Exit\nEnter event name for details:\n>");
+			System.out.print("0) Exit\nEnter event name for details:\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
@@ -426,7 +464,7 @@ public class PersonalManagementSystem {
 		while(true) {
 			System.out.println("Event: " + eventName);
 			this.currentUser.getPlanner().displayEvent(eventName);
-			System.out.print("0) Exit\n 1) List\n>");
+			System.out.print("0) Exit\n1) List\n2) Add List\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
@@ -440,6 +478,23 @@ public class PersonalManagementSystem {
 					this.clearConsole();
 					this.accessList(this.currentUser.getPlanner().getEventListName(eventName));
 				}
+			}
+			else if(selection.equals("2")) {
+				if(this.currentUser.getPlanner().eventHasList(eventName)) {
+					System.out.println(eventName + " already as a list.");
+				}
+				else {
+					System.out.println("Enter name of list to add:\n>");
+					selection = in.nextLine();
+					if(!selection.matches("[a-zA-Z].*")) {
+						System.out.println("List name must start with a letter.");
+					}
+					else {
+						this.currentUser.getPlanner().addList(selection);
+						this.currentUser.getPlanner().connectEventList(eventName, selection);
+					}
+				}
+				
 			}
 			else {
 				System.out.println("Please enter a 1 or 0.");

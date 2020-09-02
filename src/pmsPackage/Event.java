@@ -26,13 +26,14 @@ class Event {
 		startTime = start;
 		endTime = end;
 	}
-	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l) {
+	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l, String ln) {
 		name = n;
 		date = day;
 		startTime = start;
 		endTime = end;
 		description = d;
 		location = l;
+		listName = ln;
 	}
 	
 	public void setName(String n) {
@@ -92,7 +93,7 @@ class Event {
 	}
 	
 	public String toString() {
-		String value = "Name: " + name + "Date: " + this.date.toString() + "\nStart: " + this.startTime.toString() + "\nEnd: " + this.endTime.toString() + "\nDescription: " + this.description + "\nLocation: " + this.location;
+		String value = "Name: " + name + "\nDate: " + this.date.toString() + "\nStart: " + this.startTime.getHour() + ":" + this.startTime.getMinute() + "\nEnd: " + this.endTime.getHour() + ":" + this.endTime.getMinute() + "\nDescription: " + this.description + "\nLocation: " + this.location + "\nList: " + this.listName;
 		return value;
 	}
 	
