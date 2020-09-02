@@ -95,4 +95,8 @@ class Event {
 		String value = "Name: " + name + "Date: " + this.date.toString() + "\nStart: " + this.startTime.toString() + "\nEnd: " + this.endTime.toString() + "\nDescription: " + this.description + "\nLocation: " + this.location;
 		return value;
 	}
+	
+	public void display() {
+		System.out.println(this.toString());
+	}
 }
