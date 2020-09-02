@@ -17,6 +17,7 @@ class Event {
 	private LocalTime endTime;
 	private String description;
 	private String location;
+	private String listName;
 	
 	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l) {
 		this.name = n;
