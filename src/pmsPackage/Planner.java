@@ -105,11 +105,6 @@ class Planner {
 		this.lists.add(new List(name, itms));
 	}
 	
-	public void addList(String name, Item itm) {
-		this.lists.add(new List(name));
-		this.lists
-	}
-	
 	public void deleteList(String name) {
 		for(int i = 0; i < this.lists.size(); i++) {
 			if(this.lists.get(i).getName().equals(name)) {
