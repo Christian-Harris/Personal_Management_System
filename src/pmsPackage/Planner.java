@@ -83,7 +83,7 @@ class Planner {
 	public void displayEvents(LocalDate monthToView) {
 		for(int i = 0; i < this.events.size(); i++) {
 			if(this.events.get(i).getDate().getMonth().equals(monthToView.getMonth())) {
-				System.out.println(this.events.get(i).toString() + "\n");
+				System.out.println(this.events.get(i).getName() + "\n");
 			}
 		}
 	}
