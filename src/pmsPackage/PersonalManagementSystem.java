@@ -314,6 +314,9 @@ public class PersonalManagementSystem {
 				if(this.currentUser.getPlanner().eventExists(selection)) {
 					System.out.println(selection + " already exists as an event.");
 				}
+				else if(selection.matches("[a-zA-Z].*")) {
+					System.out.println("Event name must start with a letter.");
+				}
 				else {
 					name = selection;
 				}
@@ -401,14 +404,45 @@ public class PersonalManagementSystem {
 		while(true) {
 			System.out.println("View All Events");
 			this.currentUser.getPlanner().displayEvents();
-			System.out.println("0) Exit");
+			System.out.println("0) Exit\nEnter event name for details:\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
 				return;
 			}
 			else {
-				System.out.println("Please enter a 0.");
+				if(!this.currentUser.getPlanner().eventExists(selection)) {
+					System.out.println(selection + " does not exist.");
+				}
+				else {
+					this.viewEvent(selection);
+				}
+			}
+		}
+	}
+	
+	private void viewEvent(String eventName) {
+		String selection = "";
+		while(true) {
+			System.out.println("Event: " + eventName);
+			this.currentUser.getPlanner().displayEvent(eventName);
+			System.out.print("0) Exit\n 1) List\n>");
+			selection = in.nextLine();
+			this.clearConsole();
+			if(selection.equals("0")) {
+				return;
+			}
+			else if(selection.equals("1")) {
+				if(!this.currentUser.getPlanner().eventHasList(eventName)) {
+					System.out.println(eventName + " does not have an associated list.");
+				}
+				else {
+					this.clearConsole();
+					this.accessList(this.currentUser.getPlanner().getEventListName(eventName));
+				}
+			}
+			else {
+				System.out.println("Please enter a 1 or 0.");
 			}
 		}
 	}
