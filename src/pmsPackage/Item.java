@@ -8,32 +8,37 @@ package pmsPackage;
  */
 
 class Item {
-	private String description = "";
+	private String contents = "";
+	private boolean checked = false;
 	
 	public Item() {}
 	
 	public Item(String s) {
-		description = s;
+		contents = s;
 	}
 	
-	/**
-	 * This method returns a String description of the Item object.
-	 * <pre>Examples:
-	 * {@code getItem() returns a description of the item object.}
-	 * </pre>
-	 * @return description(String; a description of the Item object.)
-	 */
-	public String getItem() {
-		return this.description;
+	public String getContents() {
+		return this.contents;
 	}
 	
-	/**
-	 * This method sets the description of the Item object.
-	 * <pre>Examples:
-	 * {@code setItem("food") sets the description field to "food".}
-	 * </pre>
-	 */
-	public void setItem(String s) {
-		description = s;
+	public void setContents(String s) {
+		contents = s;
+	}
+	
+	public boolean getChecked() {
+		return this.checked;
+	}
+	
+	public void setChecked(boolean c) {
+		this.checked = c;
+	}
+	
+	public String toString() {
+		if(checked) {
+			return "+" + this.contents;
+		}
+		else {
+			return "-" + this.contents;
+		}
 	}
 }
