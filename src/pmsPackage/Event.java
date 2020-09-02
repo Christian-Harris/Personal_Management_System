@@ -15,12 +15,19 @@ class Event {
 	private LocalDate date;
 	private LocalTime startTime;
 	private LocalTime endTime;
-	private String description;
-	private String location;
-	private String listName;
+	private String description = "";
+	private String location = "";
+	private String listName = "";
 	
-	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l) {
+	
+	public Event(String n, LocalDate day, LocalTime start, LocalTime end) {
 		this.name = n;
+		date = day;
+		startTime = start;
+		endTime = end;
+	}
+	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l) {
+		name = n;
 		date = day;
 		startTime = start;
 		endTime = end;
@@ -74,6 +81,14 @@ class Event {
 	
 	public String getLocation() {
 		return this.location;
+	}
+	
+	public void setListName(String name) {
+		this.listName = name;
+	}
+	
+	public String getListName() {
+		return this.listName;
 	}
 	
 	public String toString() {
