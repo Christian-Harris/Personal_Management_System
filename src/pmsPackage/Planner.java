@@ -88,6 +88,32 @@ class Planner {
 		}
 	}
 	
+	public void displayEvent(String name) {
+		for(int i = 0; i < this.events.size(); i++) {
+			if(this.events.get(i).getName().equals(name)) {
+				this.events.get(i).display();
+			}
+		}
+	}
+	
+	public boolean eventHasList(String eventName) {
+		for(int i = 0; i < this.events.size(); i++) {
+			if(this.events.get(i).getName().equals(eventName) && !this.events.get(i).getListName().equals("")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String getEventListName(String eventName) {
+		for(int i = 0; i < this.events.size(); i++) {
+			if(this.events.get(i).getName().equals(eventName)) {
+				return this.events.get(i).getListName();
+			}
+		}
+		return "";
+	}
+	
 	public boolean listExists(String name) {
 		for(int i = 0; i < this.lists.size(); i++) {
 			if(this.lists.get(i).getName().equals(name)) {
