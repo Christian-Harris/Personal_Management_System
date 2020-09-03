@@ -44,8 +44,16 @@ class Planner {
 	
 	private boolean hasEvent(LocalDate date) {
 		for(int i = 0; i < this.events.size(); i++) {
-			if(this.events.get(i).getDate().compareTo(date) == 0) {
+			/*if(this.events.get(i).getDate().compareTo(date) == 0) {
 				return true;
+			}*/
+			if(this.events.get(i).repeats() && this.events.get(i).getDate().compareTo(date) < 0 && this.events.get(i).getEndDate().compareTo(date) > 0 && this.events.get(i).repeatsOn(date.getDayOfWeek())) {
+				return true;
+			}
+			else {
+				if(this.events.get(i).getDate().compareTo(date) == 0) {
+					return true;
+				}
 			}
 		}
 		return false;

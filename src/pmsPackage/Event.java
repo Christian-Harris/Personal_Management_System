@@ -18,6 +18,9 @@ class Event {
 	private String description = "";
 	private String location = "";
 	private String listName = "";
+	private boolean repeats = false;
+	private String repitionMask = "";
+	private LocalDate endDate;
 	
 	
 	public Event(String n, LocalDate day, LocalTime start, LocalTime end) {
@@ -26,58 +29,49 @@ class Event {
 		startTime = start;
 		endTime = end;
 	}
-	public Event(String n, LocalDate day, LocalTime start, LocalTime end, String d, String l, String ln) {
+	public Event(String n, LocalDate day, LocalTime start, LocalTime endT, String d, String l, String ln, boolean r, String rM) {
 		name = n;
 		date = day;
 		startTime = start;
-		endTime = end;
+		endTime = endT;
 		description = d;
 		location = l;
 		listName = ln;
+		repeats = r;
+		repitionMask = rM;
 	}
 	
-	public void setName(String n) {
-		this.name = n;
+	public Event(String n, LocalDate day, LocalTime start, LocalTime endT, String d, String l, String ln, boolean r, String rM, LocalDate endD) {
+		name = n;
+		date = day;
+		startTime = start;
+		endTime = endT;
+		description = d;
+		location = l;
+		listName = ln;
+		repeats = r;
+		repitionMask = rM;
+		endDate = endD;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public void setDate(LocalDate d) {
-		this.date = d;
-	}
-	
 	public LocalDate getDate() {
 		return this.date;
-	}
-	
-	public void setStartTime(LocalTime t) {
-		this.startTime = t;
 	}
 	
 	public LocalTime getStartTime() {
 		return this.startTime;
 	}
 	
-	public void setEndTime(LocalTime t) {
-		this.endTime = t;
-	}
-	
 	public LocalTime getEndTime() {
 		return this.endTime;
 	}
 	
-	public void setDescription(String d) {
-		this.description = d;
-	}
-	
 	public String getDescription() {
 		return this.description;
-	}
-	
-	public void setLocation(String l) {
-		this.location = l;
 	}
 	
 	public String getLocation() {
@@ -99,5 +93,47 @@ class Event {
 	
 	public void display() {
 		System.out.println(this.toString());
+	}
+	
+	public boolean repeats() {
+		return this.repeats;
+	}
+	
+	public String getRepitionMask() {
+		return this.repitionMask;
+	}
+	
+	public void setEndDate(LocalDate day) {
+		this.endDate = day;
+	}
+	
+	public LocalDate getEndDate() {
+		return this.endDate;
+	}
+	
+	public boolean repeatsOn(DayOfWeek day) {
+		boolean value = false;
+		if(day.equals(DayOfWeek.MONDAY) && this.repitionMask.contains("M".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.TUESDAY) && this.repitionMask.contains("T".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.WEDNESDAY) && this.repitionMask.contains("W".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.THURSDAY) && this.repitionMask.contains("H".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.FRIDAY) && this.repitionMask.contains("F".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.SATURDAY) && this.repitionMask.contains("S".subSequence(0, 1))) {
+			value = true;
+		}
+		else if(day.equals(DayOfWeek.SUNDAY) && this.repitionMask.contains("U".subSequence(0, 1))) {
+			value = true;
+		}
+		return value;
 	}
 }

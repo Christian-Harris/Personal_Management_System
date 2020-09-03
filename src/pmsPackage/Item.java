@@ -21,14 +21,6 @@ class Item {
 		return this.contents;
 	}
 	
-	public void setContents(String s) {
-		contents = s;
-	}
-	
-	public boolean getChecked() {
-		return this.checked;
-	}
-	
 	public void setChecked(boolean c) {
 		this.checked = c;
 	}

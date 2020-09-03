@@ -37,8 +37,8 @@ public class PersonalManagementSystem {
 		itms.add(tacos);
 		admin.getPlanner().addList("Shopping", itms);
 		admin.getPlanner().addList("To Do");
-		Event eventOne = new Event("Shopping", LocalDate.now(), LocalTime.now(), LocalTime.MIDNIGHT, "Grocery Shopping", "Grocery store", "Shopping");
-		Event eventTwo = new Event("Future", LocalDate.of(2021,  1, 12), LocalTime.of(12, 0), LocalTime.of(18, 30), "Future Event", "Somewhere", "");
+		Event eventOne = new Event("Shopping", LocalDate.now(), LocalTime.now(), LocalTime.MIDNIGHT, "Grocery Shopping", "Grocery store", "Shopping", false, "");
+		Event eventTwo = new Event("Future", LocalDate.of(2021,  1, 12), LocalTime.of(12, 0), LocalTime.of(18, 30), "Future Event", "Somewhere", "", false, "");
 		admin.getPlanner().addEvent(eventOne);
 		admin.getPlanner().addEvent(eventTwo);
 		
@@ -293,18 +293,22 @@ public class PersonalManagementSystem {
 		LocalDate date = LocalDate.now();
 		LocalTime startTime = LocalTime.now();
 		LocalTime endTime = LocalTime.now();
+		LocalDate endDate = LocalDate.now();
 		String description = "";
 		String location = "";
 		String listName = "";
+		boolean repeats = false;
+		String repitionMask = "";
 		
 		boolean newLink = false;
 		
 		String dateString = "";
 		String startString = "";
 		String endString = "";
+		String endDateString = "";
 		while(true) {
 			System.out.println("Add Event");
-			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) List: " + listName + "\n8) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
+			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) Repeats on " + repitionMask + " until: " + endDateString + "\n8) List: " + listName + "\n9) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
@@ -365,6 +369,27 @@ public class PersonalManagementSystem {
 				location = in.nextLine();
 			}
 			else if(selection.equals("7")) {
+				System.out.print("Enter the day to terminate repition as YYYY-MM-DD:\n>");
+				selection = in.nextLine();
+				try {
+					CharSequence cs = selection.subSequence(0,  selection.length());
+					endDate = LocalDate.parse(cs);
+					endDateString = endDate.toString();
+					System.out.println("M = Monday, T = Tuesday, W = Wednesday, H = Thursday, F = Friady, S = Satruday, U = Sunday.");
+					System.out.print("Enter which days to repeat (example MWF repeats Monday, Wednesday, and Friday:\n>");
+					selection = in.nextLine();
+					if(!selection.toUpperCase().matches("M?T?W?H?F?S?U?")) {
+						System.out.println("Invalid entry.");
+					}
+					else {
+						repitionMask = selection.toUpperCase();
+						repeats = true;
+					}
+				}catch(DateTimeParseException ex) {
+					System.out.println("Invalid date entered.");
+				}
+			}
+			else if(selection.equals("8")) {
 				System.out.println("Would you like to link and existing list? (Y/N)");
 				selection = in.nextLine();
 				if(selection.equalsIgnoreCase("Y")) {
@@ -396,7 +421,7 @@ public class PersonalManagementSystem {
 					System.out.println("Invalid input.");
 				}
 			}
-			else if(selection.equals("8")) {
+			else if(selection.equals("9")) {
 				if(name.equals("") || dateString.equals("") || startString.equals("") || endString.equals("")) {
 					System.out.println("Missing required field.");
 				}
@@ -405,7 +430,12 @@ public class PersonalManagementSystem {
 					{
 						this.currentUser.getPlanner().addList(listName);
 					}
-					this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName));
+					if(repeats) {
+						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repitionMask, endDate));
+					}
+					else {
+						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repitionMask));
+					}
 					return;
 				}
 			}

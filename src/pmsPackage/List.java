@@ -43,14 +43,6 @@ class List {
 		}
 	}
 
-	public ArrayList<Item> getList(){
-		return this.list;
-	}
-
-	public void setName(String s) {
-		this.name = s;
-	}
-
 	public String getName() {
 		return this.name;
 	}
