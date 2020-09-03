@@ -5,9 +5,9 @@ import java.time.*;
 import java.time.format.*;
 
 /**
- * <h2>PersonalManagementSystem<h2>
- * <p>This class implements the driver for the Personal Management System application.
- * <p>Created on 31 August 2020
+ * <h2>PersonalManagementSystem</h2>
+ * <p>This class implements the driver for the Personal Management System application. All menu logic is done in this class.</p>
+ * <p>Created on 31 August 2020</p>
  * @author Christian Harris
  *
  */
@@ -298,7 +298,7 @@ public class PersonalManagementSystem {
 		String location = "";
 		String listName = "";
 		boolean repeats = false;
-		String repitionMask = "";
+		String repetionMask = "";
 		
 		boolean newLink = false;
 		
@@ -308,7 +308,7 @@ public class PersonalManagementSystem {
 		String endDateString = "";
 		while(true) {
 			System.out.println("Add Event");
-			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) Repeats on " + repitionMask + " until: " + endDateString + "\n8) List: " + listName + "\n9) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
+			System.out.print("1) *Name: " + name + "\n2) *Date: " + dateString + "\n3) *Start: " + startString + "\n4) *End: " + endString + "\n5) Description: " + description + "\n6) Location: " + location + "\n7) Repeats on " + repetionMask + " until: " + endDateString + "\n8) List: " + listName + "\n9) Submit\nSelect a field to enter * means required (0 to Exit):\n>");
 			selection = in.nextLine();
 			this.clearConsole();
 			if(selection.equals("0")) {
@@ -382,7 +382,7 @@ public class PersonalManagementSystem {
 						System.out.println("Invalid entry.");
 					}
 					else {
-						repitionMask = selection.toUpperCase();
+						repetionMask = selection.toUpperCase();
 						repeats = true;
 					}
 				}catch(DateTimeParseException ex) {
@@ -431,10 +431,10 @@ public class PersonalManagementSystem {
 						this.currentUser.getPlanner().addList(listName);
 					}
 					if(repeats) {
-						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repitionMask, endDate));
+						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repetionMask, endDate));
 					}
 					else {
-						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repitionMask));
+						this.currentUser.getPlanner().addEvent(new Event(name, date, startTime, endTime, description, location, listName, repeats, repetionMask));
 					}
 					return;
 				}

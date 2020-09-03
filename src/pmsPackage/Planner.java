@@ -4,9 +4,9 @@ import java.util.*;
 import java.time.*;
 
 /**
- * <h2>Planner<h2>
- * <p>This class implements a Planner object describing an event planner.
- * <p>Created on 31 August 2020
+ * <h2>Planner</h2>
+ * <p>This class implements a Planner object describing an event planner. The Planner object is responsible for the logic pertaining to displaying calendars and lists.</p>
+ * <p>Created on 31 August 2020</p>
  * @author Christian Harris
  */
 
@@ -47,7 +47,7 @@ class Planner {
 			/*if(this.events.get(i).getDate().compareTo(date) == 0) {
 				return true;
 			}*/
-			if(this.events.get(i).repeats() && this.events.get(i).getStartDate().compareTo(date) < 0 && this.events.get(i).getEndDate().compareTo(date) > 0 && this.events.get(i).repeatsOn(date.getDayOfWeek())) {
+			if(this.events.get(i).repeats() && this.events.get(i).getStartDate().compareTo(date) <= 0 && this.events.get(i).getEndDate().compareTo(date) >= 0 && this.events.get(i).repeatsOn(date.getDayOfWeek())) {
 				return true;
 			}
 			else {
