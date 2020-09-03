@@ -13,16 +13,16 @@ class Item {
 	
 	public Item() {}
 	
-	public Item(String s) {
-		contents = s;
+	public Item(String contents) {
+		this.contents = contents;
 	}
 	
 	public String getContents() {
 		return this.contents;
 	}
 	
-	public void setChecked(boolean c) {
-		this.checked = c;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 	
 	public String toString() {

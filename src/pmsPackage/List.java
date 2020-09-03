@@ -10,34 +10,34 @@ class List {
 		this.name = s;
 	}
 	
-	public List(String s, ArrayList<Item> itms) {
-		this.name = s;
-		list = itms;
+	public List(String name, ArrayList<Item> list) {
+		this.name = name;
+		this.list = list;
 	}
 	
 	public void addItem(Item itm) {
 		this.list.add(itm);
 	}
 	
-	public void deleteItem(String itm) {
+	public void deleteItem(String name) {
 		for(int i = 0; i < this.list.size(); i++) {
-			if(this.list.get(i).getContents().equals(itm)) {
+			if(this.list.get(i).getContents().equals(name)) {
 				this.list.remove(i);
 			}
 		}
 	}
 	
-	public void checkItem(String itm) {
+	public void checkItem(String name) {
 		for(int i = 0; i < this.list.size(); i++) {
-			if(this.list.get(i).getContents().equals(itm)) {
+			if(this.list.get(i).getContents().equals(name)) {
 				this.list.get(i).setChecked(true);
 			}
 		}
 	}
 	
-	public void uncheckItem(String itm) {
+	public void uncheckItem(String name) {
 		for(int i = 0; i < this.list.size(); i++) {
-			if(this.list.get(i).getContents().equals(itm)) {
+			if(this.list.get(i).getContents().equals(name)) {
 				this.list.get(i).setChecked(false);
 			}
 		}
@@ -45,10 +45,6 @@ class List {
 
 	public String getName() {
 		return this.name;
-	}
-	
-	public boolean itemExists(String s) {
-		return false;
 	}
 	
 	public String toString() {

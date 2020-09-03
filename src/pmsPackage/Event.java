@@ -12,7 +12,7 @@ import java.time.*;
 class Event {
 	
 	private String name;
-	private LocalDate date;
+	private LocalDate startDate;
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private String description = "";
@@ -23,43 +23,43 @@ class Event {
 	private LocalDate endDate;
 	
 	
-	public Event(String n, LocalDate day, LocalTime start, LocalTime end) {
-		this.name = n;
-		date = day;
-		startTime = start;
-		endTime = end;
+	public Event(String name, LocalDate startDate, LocalTime startTime, LocalTime endTime) {
+		this.name = name;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
-	public Event(String n, LocalDate day, LocalTime start, LocalTime endT, String d, String l, String ln, boolean r, String rM) {
-		name = n;
-		date = day;
-		startTime = start;
-		endTime = endT;
-		description = d;
-		location = l;
-		listName = ln;
-		repeats = r;
-		repitionMask = rM;
+	public Event(String name, LocalDate startDate, LocalTime startTime, LocalTime endTime, String description, String location, String listName, boolean repeats, String repitionMask) {
+		this.name = name;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.description = description;
+		this.location = location;
+		this.listName = listName;
+		this.repeats = repeats;
+		this.repitionMask = repitionMask;
 	}
 	
-	public Event(String n, LocalDate day, LocalTime start, LocalTime endT, String d, String l, String ln, boolean r, String rM, LocalDate endD) {
-		name = n;
-		date = day;
-		startTime = start;
-		endTime = endT;
-		description = d;
-		location = l;
-		listName = ln;
-		repeats = r;
-		repitionMask = rM;
-		endDate = endD;
+	public Event(String name, LocalDate startDate, LocalTime startTime, LocalTime endTime, String description, String location, String listName, boolean repeats, String repitionMask, LocalDate endDate) {
+		this.name = name;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.description = description;
+		this.location = location;
+		this.listName = listName;
+		this.repeats = repeats;
+		this.repitionMask = repitionMask;
+		this.endDate = endDate;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public LocalDate getDate() {
-		return this.date;
+	public LocalDate getStartDate() {
+		return this.startDate;
 	}
 	
 	public LocalTime getStartTime() {
@@ -87,7 +87,7 @@ class Event {
 	}
 	
 	public String toString() {
-		String value = "Name: " + name + "\nDate: " + this.date.toString() + "\nStart: " + this.startTime.getHour() + ":" + this.startTime.getMinute() + "\nEnd: " + this.endTime.getHour() + ":" + this.endTime.getMinute() + "\nDescription: " + this.description + "\nLocation: " + this.location + "\nList: " + this.listName;
+		String value = "Name: " + name + "\nStart Date: " + this.startDate.toString() + "\nStart: " + this.startTime.getHour() + ":" + this.startTime.getMinute() + "\nEnd: " + this.endTime.getHour() + ":" + this.endTime.getMinute() + "\nDescription: " + this.description + "\nLocation: " + this.location + "\nList: " + this.listName;
 		return value;
 	}
 	
@@ -103,8 +103,8 @@ class Event {
 		return this.repitionMask;
 	}
 	
-	public void setEndDate(LocalDate day) {
-		this.endDate = day;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 	
 	public LocalDate getEndDate() {

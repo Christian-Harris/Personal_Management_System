@@ -47,11 +47,11 @@ class Planner {
 			/*if(this.events.get(i).getDate().compareTo(date) == 0) {
 				return true;
 			}*/
-			if(this.events.get(i).repeats() && this.events.get(i).getDate().compareTo(date) < 0 && this.events.get(i).getEndDate().compareTo(date) > 0 && this.events.get(i).repeatsOn(date.getDayOfWeek())) {
+			if(this.events.get(i).repeats() && this.events.get(i).getStartDate().compareTo(date) < 0 && this.events.get(i).getEndDate().compareTo(date) > 0 && this.events.get(i).repeatsOn(date.getDayOfWeek())) {
 				return true;
 			}
 			else {
-				if(this.events.get(i).getDate().compareTo(date) == 0) {
+				if(this.events.get(i).getStartDate().compareTo(date) == 0) {
 					return true;
 				}
 			}
@@ -90,7 +90,7 @@ class Planner {
 	
 	public void displayEvents(LocalDate monthToView) {
 		for(int i = 0; i < this.events.size(); i++) {
-			if(this.events.get(i).getDate().getMonth().equals(monthToView.getMonth())) {
+			if(this.events.get(i).getStartDate().getMonth().equals(monthToView.getMonth())) {
 				System.out.println(this.events.get(i).getName() + "\n");
 			}
 		}
