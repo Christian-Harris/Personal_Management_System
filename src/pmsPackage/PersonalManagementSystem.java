@@ -20,12 +20,19 @@ public class PersonalManagementSystem {
 	private boolean userLoggedIn = false;
 	private boolean calendarViewer = true;
 	
+	/**
+	 * The main method begins the application by instantiating a new PersonalManagementSystem object and then calls the run method.
+	 * @param args - a string array from the console.
+	 */
 	public static void main(String[] args) {
 		
 		PersonalManagementSystem pms = new PersonalManagementSystem();
 		pms.run();
 	}
 	
+	/**
+	 * Constructs a PersonalManagementSystem with an admin user and some data entries for testing.
+	 */
 	private PersonalManagementSystem(){
 		User admin = new User("admin", "password");
 		users.add(admin);
@@ -44,11 +51,17 @@ public class PersonalManagementSystem {
 		
 	}
 	
+	/**
+	 * This method begins the application fully by clearing the console screen and calling the mainMenu method.
+	 */
 	private void run() {
 		this.clearConsole();
 		this.mainMenu();
 	}
 	
+	/**
+	 * The main menu of the application. Here users an login, make or delete users, or logout.
+	 */
 	private void mainMenu() {
 		String selection = "";
 		while(true) {
@@ -85,6 +98,9 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method controls the logic for an already existing user to login. Their username and passwords are checked for validity.
+	 */
 	private void login() {
 		String selection = "";
 		String username = "";
@@ -128,6 +144,11 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method returns true if there is a User in users with a username of usr.
+	 * @param usr - the username of a User in users.
+	 * @return - true if usr is a valid user.
+	 */
 	private boolean usernameExists(String usr) {
 		for(int i = 0; i < this.users.size(); i++) {
 			if(this.users.get(i).getUsername().equals(usr)) {
@@ -137,6 +158,10 @@ public class PersonalManagementSystem {
 		return false;
 	}
 	
+	/**
+	 * This method sets the current User of the applicaton to the user with username usr.
+	 * @param usr - the user to be set as the current user.
+	 */
 	private void setCurrentUser(String usr) {
 		for(int i = 0; i < this.users.size(); i++) {
 			if(this.users.get(i).getUsername().equals(usr)) {
@@ -145,6 +170,12 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method makes sure that the user usr has a password of pswd.
+	 * @param usr - the username of a user.
+	 * @param pswd - the password of a user.
+	 * @return - true if the username and password match, false otherwise.
+	 */
 	private boolean checkPassword(String usr, String pswd) {
 		for(int i = 0; i < this.users.size(); i++) {
 			if(this.users.get(i).getUsername().equals(usr) && this.users.get(i).getPassword().equals(pswd)) {
@@ -154,6 +185,10 @@ public class PersonalManagementSystem {
 		return false;
 	}
 	
+	/**
+	 * This method controls the logic for creating new users. Users must enter a username and password. Usernames cannot be the same as any username of previously created users.
+	 * Both usernames and password must begin with letters.
+	 */
 	private void createNewUser() {
 		String username;
 		String password;
@@ -194,6 +229,9 @@ public class PersonalManagementSystem {
 		this.users.add(new User(username, password));
 	}
 	
+	/**
+	 * This method controls the logic for deleting a user. A username must be entered and then the correct password in order to successfully delete a user.
+	 */
 	private void deleteUser() {
 		String selection = "";
 		String username = "";
@@ -226,6 +264,10 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method control the logic for the calendar view of the application. The current users planner is called to display the current month.
+	 * The user can then add/remove events, view all the current months events, view all events, switch to viewing thier lists, move to next/previous months, or logout.
+	 */
 	private void calendarView() {
 		String selection = "";
 		LocalDate monthToView = LocalDate.now();
@@ -270,6 +312,10 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the menu for interacting with all the events of the current month determined by the LocalDate monthToView.
+	 * @param monthToView - the LocalDate object describing which month to interact with.
+	 */
 	private void viewCurrentMonthEvents(LocalDate monthToView) {
 		String selection = "";
 		while(true) {
@@ -287,6 +333,11 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles all the logic for creating a new event. Fields marked with an * are required for successfully creating a new Event.
+	 * Nothing is comitted to the current users planner until the user attempts to submit the data. 
+	 * If there are missing required fiels the user will be notified an no new Event will be created.
+	 */
 	public void addEvent() {
 		String name = "";
 		String selection = "";
@@ -445,6 +496,9 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the logic for removing an event based on its name. If no event with the given name exists the user is notified.
+	 */
 	private void removeEvent() {
 		String selection = "";
 		while(true) {
@@ -467,6 +521,9 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the menu for viewing all Events which have been created by the current user.
+	 */
 	private void viewAllEvents() {
 		String selection = "";
 		while(true) {
@@ -489,6 +546,10 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method views all the details for an Event with eventName.
+	 * @param eventName - the name of an Event.
+	 */
 	private void viewEvent(String eventName) {
 		String selection = "";
 		while(true) {
@@ -532,6 +593,9 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the menu for viewing all the Lists the current user has created. Users can switch to the calendar view, add/remove lists, view the details of a list, or logout.
+	 */
 	private void listsView() {
 		String selection = "";
 		while(true) {
@@ -572,6 +636,10 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the logic for accessing the details of a specific list. Users can add/delete items, check/uncheck items, or return to a previous menu.
+	 * @param name - the name of a List.
+	 */
 	private void accessList(String name) {
 		String selection = "";
 		while(true) {
@@ -612,10 +680,18 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method returns true if there exists a list with Name in the current users planner.
+	 * @param name - the name of a List.
+	 * @return - true if a List with name exists.
+	 */
 	private boolean listExists(String name) {
 		return this.currentUser.getPlanner().listExists(name);
 	}
 	
+	/**
+	 * This method handles the logic for creating a new list for the user.
+	 */
 	private void addList() {
 		String selection = "";
 		while(true) {
@@ -634,6 +710,9 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This method handles the logic for deleting a list made by the user.
+	 */
 	private void deleteList() {
 		String selection = "";
 		while(true) {
@@ -657,12 +736,18 @@ public class PersonalManagementSystem {
 		}
 	}
 	
+	/**
+	 * This is a method for clearing the console. It prints 50 emtpy lines. Should clear most consoles.
+	 */
 	private void clearConsole() {
 		for(int i = 0; i < 50; i++) {
 			System.out.print("\n");
 		}
 	}
 	
+	/**
+	 * This method logs out the current user. The userLoggedIn flag is set to false and the currentUser is set to point to null.
+	 */
 	private void logout() {
 		this.userLoggedIn = false;
 		this.currentUser = null;
