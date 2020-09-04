@@ -85,13 +85,6 @@ class List {
 	}
 	
 	/**
-	 * This returns this name.
-	 */
-	public String toString() {
-		return this.name;
-	}
-	
-	/**
 	 * This method prints the name of each Item in list to the console. Each name is on a new line.
 	 */
 	public void display() {

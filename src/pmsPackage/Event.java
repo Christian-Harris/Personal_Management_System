@@ -28,13 +28,14 @@ class Event {
 	 * @param name - the name of the event.
 	 * @param startDate - the date the event begins on.
 	 * @param startTime - the time the event begins.
-	 * @param endTime - the time the Eveeventnt ends.
+	 * @param endTime - the time the event ends.
 	 */
 	public Event(String name, LocalDate startDate, LocalTime startTime, LocalTime endTime) {
 		this.name = name;
 		this.startDate = startDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.endDate = startDate;
 	}
 	
 	/**
@@ -59,6 +60,7 @@ class Event {
 		this.listName = listName;
 		this.repeats = repeats;
 		this.repetionMask = repetionMask;
+		this.endDate = startDate;
 	}
 	
 	/**
@@ -173,14 +175,6 @@ class Event {
 	 */
 	public boolean repeats() {
 		return this.repeats;
-	}
-	
-	/**
-	 * This method returns the repition mask encoding which days this event is set to repeat.
-	 * @return - the repition mask encoding which days this event is set to repeat.
-	 */
-	public String getRepitionMask() {
-		return this.repetionMask;
 	}
 	
 	/**

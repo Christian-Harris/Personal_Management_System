@@ -55,7 +55,7 @@ class Planner {
 	 * @param date - the date test to see if it lies on or in some event window.
 	 * @return - true if the date falls on or in some event window, false otherwise.
 	 */
-	private boolean hasEvent(LocalDate date) {
+	public boolean hasEvent(LocalDate date) {
 		for(int i = 0; i < this.events.size(); i++) {
 			/*if(this.events.get(i).getDate().compareTo(date) == 0) {
 				return true;

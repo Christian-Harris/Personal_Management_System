@@ -33,7 +33,7 @@ public class PersonalManagementSystem {
 	/**
 	 * Constructs a PersonalManagementSystem with an admin user and some data entries for testing.
 	 */
-	private PersonalManagementSystem(){
+	PersonalManagementSystem(){
 		User admin = new User("admin", "password");
 		users.add(admin);
 		Item bannana = new Item("bannana");
@@ -149,7 +149,7 @@ public class PersonalManagementSystem {
 	 * @param usr - the username of a User in users.
 	 * @return - true if usr is a valid user.
 	 */
-	private boolean usernameExists(String usr) {
+	public boolean usernameExists(String usr) {
 		for(int i = 0; i < this.users.size(); i++) {
 			if(this.users.get(i).getUsername().equals(usr)) {
 				return true;
@@ -176,7 +176,7 @@ public class PersonalManagementSystem {
 	 * @param pswd - the password of a user.
 	 * @return - true if the username and password match, false otherwise.
 	 */
-	private boolean checkPassword(String usr, String pswd) {
+	public boolean checkPassword(String usr, String pswd) {
 		for(int i = 0; i < this.users.size(); i++) {
 			if(this.users.get(i).getUsername().equals(usr) && this.users.get(i).getPassword().equals(pswd)) {
 				return true;
@@ -685,7 +685,7 @@ public class PersonalManagementSystem {
 	 * @param name - the name of a List.
 	 * @return - true if a List with name exists.
 	 */
-	private boolean listExists(String name) {
+	public boolean listExists(String name) {
 		return this.currentUser.getPlanner().listExists(name);
 	}
 	
